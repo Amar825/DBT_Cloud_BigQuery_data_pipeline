@@ -1,2 +1,11 @@
-# DBT_Cloud_BigQuery_data_pipeline
-This repository demonstrates the development of an end-to-end data pipeline using dbt Core and Google BigQuery. It focuses on building, testing, and deploying data models using open-source tools. 
+# Healthcare Data Pipeline
+
+🎯 End-to-end data pipeline using Python, GCP (GCS + BigQuery), and DBT.
+
+## ✅ Features
+- Synthetic data generation
+- Dev/prod data separation
+- GCS storage
+- BigQuery external tables
+
+...
