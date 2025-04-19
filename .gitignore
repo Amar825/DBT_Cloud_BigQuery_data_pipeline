@@ -26,3 +26,5 @@ target/
 dbt_packages/
 logs/
 # end dbt Cloud content
+# Ignore Python virtual environment
+bigquery_venv/
