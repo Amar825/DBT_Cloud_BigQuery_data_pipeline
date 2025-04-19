@@ -60,7 +60,7 @@ jobs:
 
           # Dynamically generate profiles.yml
           cat <<EOF > /home/runner/.dbt/profiles.yml
-          healthcare_dbt_bigquery_data_pipeline:
+          default:
             outputs:
               dev:
                 dataset: dev_healthcare_data
