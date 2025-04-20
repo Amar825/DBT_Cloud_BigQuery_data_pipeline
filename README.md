@@ -1,5 +1,6 @@
-# DBT_Cloud_BigQuery_data_pipeline 🚀  
-An end-to-end data engineering pipeline using **Google Cloud Platform**, **DBT**, and **BigQuery**, with full automation through **GitHub Actions (CI/CD)**.
+# dbt-GCP-BigQuery-Healthcare-data-pipeline 🚀  
+**A fully automated, production-grade data pipeline on** **GCP** **using** **DBT**, **BigQuery**, **and GitHub Actions (CI/CD)** — **built to simulate a real-world healthcare analytics use case.**
+
 
 ---
 
