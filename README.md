@@ -135,9 +135,14 @@ OPTIONS (
 );
 ```
 ### 4.5 DBT Modeling
-- Built staging (`stg_`) and core (`fct_`, `dim_`) models
-- Used `source()` and `ref()` for lineage and modularity
-
+models/
+├── chronic_conditions_summary.sql
+├── claims_status_summary.sql
+├── high_claim_patients.sql
+├── patient_demographics.sql
+├── health_anomalies.sql
+├── sources.yml
+└── schema.yml
 ### 4.6 Testing & Documentation
 - Added `schema.yml` for column-level tests (`not_null`, `unique`)
 - Used `dbt test`, `dbt docs generate`, `dbt docs serve`
