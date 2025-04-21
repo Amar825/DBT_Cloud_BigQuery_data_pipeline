@@ -198,9 +198,58 @@ models:
 ```
 
 ### 4.7 CI/CD with GitHub Actions
-- `ci.yml`: runs `dbt test` on pull requests
-- `cd.yml`: deploys models to prod on merge to `main`
-- Injected GCP credentials via GitHub Secrets
+To automate testing and deployment of my DBT models, I configured **GitHub Actions** to handle CI (Continuous Integration) and CD (Continuous Deployment).
+
+This ensures:
+- ✅ Every **pull request** runs `dbt test` to validate models before merging
+- ✅ Every **merge to main** triggers `dbt run` to deploy production models to BigQuery
+- ✅ All deployments are version-controlled, reproducible, and secure
+
+---
+
+#### 🔁 Continuous Integration (`ci.yml`)
+
+- Triggered on **pull requests to `main`**
+- Spins up a fresh Ubuntu runner
+- Installs Python + DBT
+- Injects a secure GCP service account key via **GitHub Secrets**
+- Generates a temporary `profiles.yml`
+- Runs `dbt test` to validate schema and model logic
+
+  <p align="center"> <img src="./images/github-actions-ci-success.png" alt="CI Passing" width="700"/> </p>  `
+
+✅ Example snippet from `ci.yml`:
+
+```yaml
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+      - run: pip install dbt-bigquery
+      - run: dbt test --profiles-dir /home/runner/.dbt --target dev
+```
+
+#### 🚀 Continuous Deployment (cd.yml)
+Triggered on push to main
+
+- Installs DBT, authenticates with GCP
+- Runs dbt run with --target prod to build models into the production dataset
+
+  <p align="center"> <img src="./images/github-actions-cd-success.png" alt="CD to Production" width="700"/> </p>
+
+✅ Secure deployment:
+
+GCP credentials stored as GitHub Secrets
+
+gcp-key.json and profiles.yml are generated at runtime (not stored in repo)
+
 
 ### 4.8 Deployment to Production
 - All models deployed to `prod_healthcare_data` via GitHub Actions
