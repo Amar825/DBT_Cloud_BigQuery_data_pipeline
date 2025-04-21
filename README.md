@@ -143,13 +143,18 @@ In this step, I created several DBT models that:
 - Performed aggregations and filtering logic (e.g., identifying high claim patients, summarizing chronic conditions)
 - Joined datasets (e.g., patients with claims or EHR data)
 - Were configured with DBT’s built-in materializations (`view`, `incremental`) for flexibility and performance
+All transformations were written in modular `.sql` models, configured via `dbt_project.yml` and executed using DBT CLI or GitHub Actions.
 
   <p align="center">
   <img src="./images/dbt-model-lineage.png" alt="DBT Lineage Graph" width="800"/>
 </p>
-  
+ This lineage graph was generated using `dbt docs generate` and `dbt docs serve`.
 
-All transformations were written in modular `.sql` models, configured via `dbt_project.yml` and executed using DBT CLI or GitHub Actions.
+It shows how each model in the pipeline is derived from raw external source tables in BigQuery:
+
+- ✅ **Sources** (`SRC`) like `claims_data_external`, `patient_data_external`, and `ehr_data_external` represent external tables that directly query files stored in Google Cloud Storage
+- ✅ **Models** (`MDL`) like `high-claim-patients`, `chronic-conditions-summary`, and `health-anomalies` represent transformed tables built using SQL logic in DBT 
+
 
 
 #### 🧱 Key DBT Concepts Used:
