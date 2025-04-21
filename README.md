@@ -1,26 +1,30 @@
 # dbt-GCP-BigQuery-Healthcare-data-pipeline 🚀  
+![DBT](https://img.shields.io/badge/DBT-v1.9.4-orange)
+![BigQuery](https://img.shields.io/badge/BigQuery-enabled-blue)
+![CI/CD](https://img.shields.io/badge/GitHub_Actions-Automated-green)
+
 **A fully automated, production-grade data pipeline on** **GCP** **using** **DBT**, **BigQuery**, **and GitHub Actions (CI/CD)** — **built to simulate a real-world healthcare analytics use case.**
 
 
 ---
 
 ## 📚 Table of Contents
-1. [Project Overview](#project-overview)
-2. [Tools & Technologies Used](#tools--technologies-used)
-3. [Architecture Diagram](#architecture-diagram)
-4. [Step-by-Step Workflow](#step-by-step-workflow)
+
+1. [Project Overview](#-1-project-overview)
+2. [Tools & Technologies Used](#-2-tools--technologies-used)
+3. [Architecture Diagram](#-3-architecture-diagram)
+4. [Step-by-Step Workflow](#-4-step-by-step-workflow)
    - [4.1 GCP Setup](#41-gcp-setup)
    - [4.2 BigQuery Datasets & GCS Buckets](#42-bigquery-datasets--gcs-buckets)
-   - [4.3 Data Generation & Upload](#43-data-generation--upload)
-   - [4.4 External Table Creation](#44-external-table-creation)
+   - [4.3 Data Generation Script (Python)](#43-data-generation-script-python)
+   - [4.4 External Table Creation in BigQuery](#44-external-table-creation-in-bigquery)
    - [4.5 DBT Modeling](#45-dbt-modeling)
    - [4.6 Testing & Documentation](#46-testing--documentation)
    - [4.7 CI/CD with GitHub Actions](#47-cicd-with-github-actions)
-   - [4.8 Deployment to Production](#48-deployment-to-production)
-   - [4.9 Scheduled Jobs & Looker Dashboard](#49-scheduled-jobs--looker-dashboard)
-5. [Data Lineage & Model Flow](#data-lineage--model-flow)
-6. [Screenshots & Walkthrough](#screenshots--walkthrough)
-7. [Key Learnings](#key-learnings)
+5. [Key Learnings](#-key-learnings)
+6. [Conclusion](#-conclusion)
+7. [Acknowledgements](#-acknowledgements)
+
 
 
 ---
@@ -279,7 +283,7 @@ It reflects both the technical skills I’ve developed and my drive to learn ind
 
 ## 🙏 Acknowledgements
 
-This project was built by closely following a YouTube tutorial by [DATA ](https://www.youtube.com/playlist?list=PLs9W2D7jqlTXbHWkpNUzIC_G8KpLMH6yZ), which covered how to build an end-to-end data pipeline using DBT, BigQuery, and GitHub Actions.
+This project was built by closely following a YouTube tutorial by [DATA TIME](https://www.youtube.com/playlist?list=PLs9W2D7jqlTXbHWkpNUzIC_G8KpLMH6yZ), which covered how to build an end-to-end data pipeline using DBT, BigQuery, and GitHub Actions.
 
 My goal with this project was not to invent something new, but to:
 - Rebuild the full pipeline on my own
