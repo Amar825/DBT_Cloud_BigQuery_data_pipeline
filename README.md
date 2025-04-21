@@ -21,9 +21,7 @@
 5. [Data Lineage & Model Flow](#data-lineage--model-flow)
 6. [Screenshots & Walkthrough](#screenshots--walkthrough)
 7. [Key Learnings](#key-learnings)
-8. [Why This Project Matters](#why-this-project-matters)
-9. [Conclusion](#conclusion)
-10. [Contact Me](#contact-me)
+
 
 ---
 
@@ -65,6 +63,15 @@ Raw synthetic healthcare data is generated and stored in GCS, externalized into 
 - Created a new Google Cloud project (`root-matrix-457217-p5`)
 - Enabled **BigQuery**, **Cloud Storage**, and **IAM** APIs
 - Created service accounts with proper IAM roles (`BigQuery Admin`, `Storage Admin`, etc.)
+- - Created a dedicated **service account** in GCP for secure, programmatic access
+- Assigned necessary roles:
+  - `BigQuery Admin`
+  - `Storage Admin`
+  - `BigQuery Job User`
+- Downloaded the service account's **JSON key**
+- Used this key for:
+  - Local development (`profiles.yml` with `keyfile:` path)
+  - GitHub Actions (`gcp-key.json` generated dynamically from GitHub Secrets)
 
 <p align="center">
   <img src="./images/gcp-project-setup.png" alt="GCP Project Setup" width="700"/>
@@ -99,25 +106,6 @@ To simulate a real-world healthcare data pipeline, I wrote a Python script that:
 ✅ The script performs **all ingestion + staging steps programmatically**, without manual uploads.
 
 > 📁 Script location: [`data_generator/synthetic_data_generator.py`](./data_generator/synthetic_data_generator.py)
-
-#### 🔑 Key Logic Overview
-
-```python
-# Create the bucket if it doesn't exist
-def create_bucket():
-    bucket = storage_client.bucket(BUCKET_NAME)
-    if not bucket.exists():
-        storage_client.create_bucket(BUCKET_NAME)
-
-# Generate synthetic patients
-def generate_patients(num_records):
-    ...
-    return pd.DataFrame(patients)
-
-# Upload CSV, JSON, or Parquet to GCS
-def upload_to_gcs(data, path, filename, file_format):
-    ...
-```
 
 
 ### 4.4 External Table Creation
