@@ -27,15 +27,15 @@
 
 ---
 
-## 📌 Project Overview
+## 📌 1. Project Overview
 
 This project demonstrates my ability to build a **scalable, production-grade data pipeline** using industry-standard tools. From raw data ingestion and transformation to CI/CD and visualization, this project simulates the daily responsibilities of a Data Engineer.
 
-> ⚙️ Tech stack: GCP + BigQuery + DBT Core + GitHub Actions + Python + Looker Studio
+> ⚙️ Tech stack: GCP + BigQuery + DBT Core + GitHub Actions + Python 
 
 ---
 
-## 🛠️ Tools & Technologies Used
+## 🛠️ 2. Tools & Technologies Used
 
 | Tool                | Purpose                                      |
 |---------------------|----------------------------------------------|
@@ -48,7 +48,7 @@ This project demonstrates my ability to build a **scalable, production-grade dat
 
 ---
 
-## 🧱 Architecture Diagram
+## 🧱 3. Architecture Diagram
 
 This project follows a modular and automated data engineering architecture on Google Cloud.  
 Raw synthetic healthcare data is generated and stored in GCS, externalized into BigQuery, transformed via DBT models, and deployed through CI/CD using GitHub Actions.
@@ -59,21 +59,67 @@ Raw synthetic healthcare data is generated and stored in GCS, externalized into 
 
 ---
 
-## 🔁 Step-by-Step Workflow
+## 🔁 4. Step-by-Step Workflow
 
 ### 4.1 GCP Setup
-- Created GCP project
-- Configured IAM roles and Service Accounts
-- Enabled BigQuery & GCS
+- Created a new Google Cloud project (`root-matrix-457217-p5`)
+- Enabled **BigQuery**, **Cloud Storage**, and **IAM** APIs
+- Created service accounts with proper IAM roles (`BigQuery Admin`, `Storage Admin`, etc.)
+
+<p align="center">
+  <img src="./images/gcp-project-setup.png" alt="GCP Project Setup" width="700"/>
+</p>
 
 ### 4.2 BigQuery Datasets & GCS Buckets
-- Created `dev_healthcare_data` and `prod_healthcare_data`
-- Created GCS bucket `healthcare-data-bucket-*`
+- Created datasets:
+  - `dev_healthcare_data`
+  - `prod_healthcare_data`
+- **Cloud Storage bucket (`healthcare-data-bucket-amarkhatri`) was created automatically by the Python script**
 
-### 4.3 Data Generation & Upload
-- Wrote Python script using `Faker` and `Pandas`
-- Generated realistic healthcare data (patients, EHR, claims)
-- Uploaded CSV, JSON, Parquet to GCS
+<p align="center">
+  <img src="./images/gcs-bucket-files.png" alt="GCS Bucket with Raw Files" width="700"/>
+</p>
+
+### 4.3 Data Generation Script (Python)
+### 4.3 Data Generation Script (Python)
+
+To simulate a real-world healthcare data pipeline, I wrote a Python script that:
+
+- Generates synthetic data using the **Faker** library for:
+  - Patient demographics (`CSV`)
+  - Electronic health records (`JSON`)
+  - Insurance claims (`Parquet`)
+- Creates a **Cloud Storage bucket** if it doesn't already exist
+- **Cleans the target folders** before uploading new files
+- Uploads raw data directly to GCS (`dev/` and `prod/` folders)
+- Writes all files in appropriate formats using:
+  - `pandas` for CSV
+  - `json` for newline-delimited JSON
+  - `pyarrow` for Parquet
+
+✅ The script performs **all ingestion + staging steps programmatically**, without manual uploads.
+
+> 📁 Script location: [`data_generator/synthetic_data_generator.py`](./data_generator/synthetic_data_generator.py)
+
+#### 🔑 Key Logic Overview
+
+```python
+# Create the bucket if it doesn't exist
+def create_bucket():
+    bucket = storage_client.bucket(BUCKET_NAME)
+    if not bucket.exists():
+        storage_client.create_bucket(BUCKET_NAME)
+
+# Generate synthetic patients
+def generate_patients(num_records):
+    ...
+    return pd.DataFrame(patients)
+
+# Upload CSV, JSON, or Parquet to GCS
+def upload_to_gcs(data, path, filename, file_format):
+    ...
+
+
 
 ### 4.4 External Table Creation
 - Used BigQuery to create external tables from GCS
@@ -102,7 +148,7 @@ Raw synthetic healthcare data is generated and stored in GCS, externalized into 
 
 ---
 
-## 🧬 Data Lineage & Model Flow
+## 🧬 5. Data Lineage & Model Flow
 
 > _Include a screenshot of your DBT Cloud lineage graph here_
 
@@ -110,7 +156,7 @@ Shows how raw data from GCS flows into staging, transformations, and final analy
 
 ---
 
-## 📸 Screenshots & Walkthrough
+## 📸 6. Screenshots & Walkthrough
 
 Add screenshots of:
 
@@ -118,4 +164,4 @@ Add screenshots of:
 - GCS bucket with raw files
 - DBT models + directory structure
 - GitHub Actions CI passing
-- Looker Studio dashboard
+
