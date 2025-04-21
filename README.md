@@ -261,6 +261,35 @@ GCP credentials stored as GitHub Secrets
 
 gcp-key.json and profiles.yml are generated at runtime (not stored in repo)
 
+## 📘 Key Learnings
+
+- Developed a clear understanding of DBT’s transformation flow and model structure
+- Gained hands-on experience integrating Python, BigQuery, and GCS for cloud data pipelines
+- Learned how to build secure, production-ready CI/CD pipelines using GitHub Actions
+- Practiced writing modular, testable SQL models with automated validations
+- Built an end-to-end pipeline that mirrors real-world engineering workflows
+
+## ✅ Conclusion
+
+This project started as a hands-on learning exercise and became a full-stack, automated data engineering pipeline. I worked with industry-standard tools (GCP, DBT, GitHub Actions), built my own data sources, and pushed transformations all the way to production.
+
+It reflects both the technical skills I’ve developed and my drive to learn independently and build real, usable solutions.
+
+---
+
+## 🙏 Acknowledgements
+
+This project was built by closely following a YouTube tutorial by [DATA ](https://www.youtube.com/playlist?list=PLs9W2D7jqlTXbHWkpNUzIC_G8KpLMH6yZ), which covered how to build an end-to-end data pipeline using DBT, BigQuery, and GitHub Actions.
+
+My goal with this project was not to invent something new, but to:
+- Rebuild the full pipeline on my own
+- Understand every component (GCP, DBT, CI/CD)
+- Practice deploying it in a production-ready, portfolio-quality format
+- Document my learning in a way that demonstrates my technical depth and readiness for real-world work
+
+All credit for the project architecture and approach goes to the original creator — this repo reflects my hands-on execution of the same, and my own journey of learning through replication.
+
+
 
 
 
