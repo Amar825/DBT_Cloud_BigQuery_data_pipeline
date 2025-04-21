@@ -136,7 +136,29 @@ OPTIONS (
 ```
 ### 4.5 DBT Modeling
 
-models/ ├── chronic_conditions_summary.sql ├── claims_status_summary.sql ├── high_claim_patients.sql ├── patient_demographics.sql ├── health_anomalies.sql ├── sources.yml └── schema.yml
+Once the raw data was available via external tables in BigQuery, I used **DBT Core** to build a structured transformation layer on top of it.
+
+In this step, I created several DBT models that:
+- Referenced external tables using `{{ source() }}`
+- Performed aggregations and filtering logic (e.g., identifying high claim patients, summarizing chronic conditions)
+- Joined datasets (e.g., patients with claims or EHR data)
+- Were configured with DBT’s built-in materializations (`view`, `incremental`) for flexibility and performance
+
+  <p align="center">
+  <img src="./images/dbt-model-lineage.png" alt="DBT Lineage Graph" width="800"/>
+</p>
+  
+
+All transformations were written in modular `.sql` models, configured via `dbt_project.yml` and executed using DBT CLI or GitHub Actions.
+
+
+#### 🧱 Key DBT Concepts Used:
+
+- Used `{{ source() }}` to connect to external BigQuery tables backed by GCS
+- Applied `{{ config(materialized='incremental') }}` to optimize model performance
+- Structured models for clarity and reusability
+- Defined column-level tests using `schema.yml` (e.g., `not_null`, `unique`)
+  
 ### 4.6 Testing & Documentation
 - Added `schema.yml` for column-level tests (`not_null`, `unique`)
 - Used `dbt test`, `dbt docs generate`, `dbt docs serve`
@@ -150,26 +172,10 @@ models/ ├── chronic_conditions_summary.sql ├── claims_status_summary
 - All models deployed to `prod_healthcare_data` via GitHub Actions
 - Fully automated and version-controlled
 
-### 4.9 Scheduled Jobs & Looker Dashboard
-- Scheduled DBT builds (daily)
-- Created interactive dashboards in Looker Studio
 
----
 
-## 🧬 5. Data Lineage & Model Flow
 
-> _Include a screenshot of your DBT Cloud lineage graph here_
 
-Shows how raw data from GCS flows into staging, transformations, and final analytical tables.
 
----
 
-## 📸 6. Screenshots & Walkthrough
-
-Add screenshots of:
-
-- BigQuery datasets (`dev` and `prod`)
-- GCS bucket with raw files
-- DBT models + directory structure
-- GitHub Actions CI passing
 
