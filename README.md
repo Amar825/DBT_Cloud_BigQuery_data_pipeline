@@ -108,10 +108,32 @@ To simulate a real-world healthcare data pipeline, I wrote a Python script that:
 > 📁 Script location: [`data_generator/synthetic_data_generator.py`](./data_generator/synthetic_data_generator.py)
 
 
-### 4.4 External Table Creation
-- Used BigQuery to create external tables from GCS
-- Formats: CSV (patients), JSON (EHR), Parquet (claims)
+### 4.4 External Table Creation in BigQuery
+After uploading the raw data to GCS, I created **external tables** in BigQuery that reference those files directly — allowing SQL querying without loading the data into native BigQury storage.
 
+- `patient_data.csv` → **CSV external table**
+- `ehr_data.json` → **newline-delimited JSON external table**
+- `claims_data.parquet` → **Parquet external table (schema-aware)**
+
+These external tables were created for both:
+- `dev_healthcare_data` dataset (5K test records)
+- `prod_healthcare_data` dataset (20K records)
+
+#### ✅ Why external tables though?:
+- Cost-efficient for large, raw datasets
+- Schema can be auto-detected or explicitly defined
+- Queryable via standard SQL like any native table
+
+#### 🧱 Table Creation SQL Example (CSV):
+
+```sql
+CREATE OR REPLACE EXTERNAL TABLE `project_id.dev_healthcare_data.patient_data_external`
+OPTIONS (
+  format = 'CSV',
+  uris = ['gs://healthcare-data-bucket-amarkhatri/dev/patient_data.csv'],
+  skip_leading_rows = 1
+);
+```
 ### 4.5 DBT Modeling
 - Built staging (`stg_`) and core (`fct_`, `dim_`) models
 - Used `source()` and `ref()` for lineage and modularity
