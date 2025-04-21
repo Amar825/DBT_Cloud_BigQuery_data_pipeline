@@ -165,8 +165,37 @@ It shows how each model in the pipeline is derived from raw external source tabl
 - Defined column-level tests using `schema.yml` (e.g., `not_null`, `unique`)
   
 ### 4.6 Testing & Documentation
-- Added `schema.yml` for column-level tests (`not_null`, `unique`)
-- Used `dbt test`, `dbt docs generate`, `dbt docs serve`
+To ensure data quality and trust in the pipeline, I implemented column-level tests and added documentation using `schema.yml` files in DBT.
+DBT allows us to define tests and metadata **alongside our models** — all inside YAML. These tests run automatically using `dbt test`.
+
+#### ✅ Why I Used `schema.yml`:
+
+- To enforce data integrity on critical columns (`not_null`, `unique`)
+- To validate raw data coming from external sources
+- To document model and column purposes using DBT's built-in documentation system
+- To support CI/CD by catching schema or data issues automatically in GitHub Actions
+
+---
+
+#### 🧪 Sample Test Configuration
+
+Here’s an example from `schema.yml`:
+
+```yaml
+version: 2
+
+models:
+  - name: high_claim_patients
+    description: "Identifies patients with total claim amounts above a threshold"
+    columns:
+      - name: patient_id
+        tests:
+          - unique
+          - not_null
+      - name: total_claim_amount
+        tests:
+          - not_null
+```
 
 ### 4.7 CI/CD with GitHub Actions
 - `ci.yml`: runs `dbt test` on pull requests
