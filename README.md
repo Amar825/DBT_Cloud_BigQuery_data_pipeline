@@ -45,13 +45,17 @@ This project demonstrates my ability to build a **scalable, production-grade dat
 | **DBT Core**         | Transformations, testing, documentation     |
 | **GitHub Actions**   | CI/CD automation pipeline                   |
 | **Python**           | Data generation script                      |
-| **Looker Studio**    | Visualization / dashboarding                |
 
 ---
 
 ## 🧱 Architecture Diagram
 
-> _Add a PNG/diagram showing: GCS → BigQuery External Tables → DBT Models → CI/CD → Looker_
+This project follows a modular and automated data engineering architecture on Google Cloud.  
+Raw synthetic healthcare data is generated and stored in GCS, externalized into BigQuery, transformed via DBT models, and deployed through CI/CD using GitHub Actions.
+
+<p align="center">
+  <img src="./images/architecture-diagram.png" alt="Architecture Diagram" width="750"/>
+</p>
 
 ---
 
