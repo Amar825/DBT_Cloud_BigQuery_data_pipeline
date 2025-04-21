@@ -81,7 +81,6 @@ Raw synthetic healthcare data is generated and stored in GCS, externalized into 
 </p>
 
 ### 4.3 Data Generation Script (Python)
-### 4.3 Data Generation Script (Python)
 
 To simulate a real-world healthcare data pipeline, I wrote a Python script that:
 
@@ -118,7 +117,7 @@ def generate_patients(num_records):
 # Upload CSV, JSON, or Parquet to GCS
 def upload_to_gcs(data, path, filename, file_format):
     ...
-
+```
 
 
 ### 4.4 External Table Creation
