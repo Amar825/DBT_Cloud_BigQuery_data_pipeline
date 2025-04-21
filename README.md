@@ -242,6 +242,17 @@ Triggered on push to main
 - Installs DBT, authenticates with GCP
 - Runs dbt run with --target prod to build models into the production dataset
 
+  #### 📁 Key Deployment Details
+
+| Config         | Value |
+|----------------|-------|
+| Deployment method | GitHub Actions |
+| Trigger         | `push` to `main` |
+| DBT command     | `dbt run --target prod` |
+| Destination     | `prod_healthcare_data` BigQuery dataset |
+| Auth method     | GCP service account via GitHub Secrets |
+| Environment     | Fresh Ubuntu runner (`ubuntu-latest`) |
+
   <p align="center"> <img src="./images/github-actions-cd-success.png" alt="CD to Production" width="700"/> </p>
 
 ✅ Secure deployment:
@@ -251,9 +262,7 @@ GCP credentials stored as GitHub Secrets
 gcp-key.json and profiles.yml are generated at runtime (not stored in repo)
 
 
-### 4.8 Deployment to Production
-- All models deployed to `prod_healthcare_data` via GitHub Actions
-- Fully automated and version-controlled
+
 
 
 
