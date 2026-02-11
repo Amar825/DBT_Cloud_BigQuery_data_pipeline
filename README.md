@@ -156,8 +156,8 @@ All transformations were written in modular `.sql` models, configured via `dbt_p
 
 It shows how each model in the pipeline is derived from raw external source tables in BigQuery:
 
-- ✅ **Sources** (`SRC`) like `claims_data_external`, `patient_data_external`, and `ehr_data_external` represent external tables that directly query files stored in Google Cloud Storage
-- ✅ **Models** (`MDL`) like `high-claim-patients`, `chronic-conditions-summary`, and `health-anomalies` represent transformed tables built using SQL logic in DBT 
+-  **Sources** (`SRC`) like `claims_data_external`, `patient_data_external`, and `ehr_data_external` represent external tables that directly query files stored in Google Cloud Storage
+-  **Models** (`MDL`) like `high-claim-patients`, `chronic-conditions-summary`, and `health-anomalies` represent transformed tables built using SQL logic in DBT 
 
 
 
@@ -172,7 +172,7 @@ It shows how each model in the pipeline is derived from raw external source tabl
 To ensure data quality and trust in the pipeline, I implemented column-level tests and added documentation using `schema.yml` files in DBT.
 DBT allows us to define tests and metadata **alongside our models** — all inside YAML. These tests run automatically using `dbt test`.
 
-#### ✅ Why I Used `schema.yml`:
+####  Why I Used `schema.yml`:
 
 - To enforce data integrity on critical columns (`not_null`, `unique`)
 - To validate raw data coming from external sources
@@ -222,7 +222,7 @@ This ensures:
 
   <p align="center"> <img src="./images/github-actions-ci-success.png" alt="CI Passing" width="700"/> </p>  `
 
-✅ Example snippet from `ci.yml`:
+ Example snippet from `ci.yml`:
 
 ```yaml
 on:
@@ -259,7 +259,7 @@ Triggered on push to main
 
   <p align="center"> <img src="./images/github-actions-cd-success.png" alt="CD to Production" width="700"/> </p>
 
-✅ Secure deployment:
+ Secure deployment:
 
 GCP credentials stored as GitHub Secrets
 
@@ -273,7 +273,7 @@ gcp-key.json and profiles.yml are generated at runtime (not stored in repo)
 - Practiced writing modular, testable SQL models with automated validations
 - Built an end-to-end pipeline that mirrors real-world engineering workflows
 
-## ✅ Conclusion
+##  Conclusion
 
 This project started as a hands-on learning exercise and became a full-stack, automated data engineering pipeline. I worked with industry-standard tools (GCP, DBT, GitHub Actions), built my own data sources, and pushed transformations all the way to production.
 
@@ -281,7 +281,7 @@ It reflects both the technical skills I’ve developed and my drive to learn ind
 
 ---
 
-## 🙏 Acknowledgements
+##  Acknowledgements
 
 This project was built by closely following a YouTube tutorial by [DATA TIME](https://www.youtube.com/playlist?list=PLs9W2D7jqlTXbHWkpNUzIC_G8KpLMH6yZ), which covered how to build an end-to-end data pipeline using DBT, BigQuery, and GitHub Actions.
 
