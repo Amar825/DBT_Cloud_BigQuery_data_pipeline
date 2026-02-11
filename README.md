@@ -1,4 +1,4 @@
-# dbt-GCP-BigQuery-Healthcare-data-pipeline 🚀  
+# dbt-GCP-BigQuery-Healthcare-data-pipeline   
 ![DBT](https://img.shields.io/badge/DBT-v1.9.4-orange)
 ![BigQuery](https://img.shields.io/badge/BigQuery-enabled-blue)
 ![CI/CD](https://img.shields.io/badge/GitHub_Actions-Automated-green)
@@ -8,7 +8,7 @@
 
 ---
 
-## 📚 Table of Contents
+##  Table of Contents
 
 1. [Project Overview](#-1-project-overview)
 2. [Tools & Technologies Used](#-2-tools--technologies-used)
@@ -29,7 +29,7 @@
 
 ---
 
-## 📌 1. Project Overview
+##  1. Project Overview
 
 This project demonstrates my ability to build a **scalable, production-grade data pipeline** using industry-standard tools. From raw data ingestion and transformation to CI/CD and visualization, this project simulates the daily responsibilities of a Data Engineer.
 
@@ -50,7 +50,7 @@ This project demonstrates my ability to build a **scalable, production-grade dat
 
 ---
 
-## 🧱 3. Architecture Diagram
+##  3. Architecture Diagram
 
 This project follows a modular and automated data engineering architecture on Google Cloud.  
 Raw synthetic healthcare data is generated and stored in GCS, externalized into BigQuery, transformed via DBT models, and deployed through CI/CD using GitHub Actions.
@@ -61,7 +61,7 @@ Raw synthetic healthcare data is generated and stored in GCS, externalized into 
 
 ---
 
-## 🔁 4. Step-by-Step Workflow
+##  4. Step-by-Step Workflow
 
 ### 4.1 GCP Setup
 - Created a new Google Cloud project (`root-matrix-457217-p5`)
@@ -107,7 +107,7 @@ To simulate a real-world healthcare data pipeline, I wrote a Python script that:
   - `json` for newline-delimited JSON
   - `pyarrow` for Parquet
 
-✅ The script performs **all ingestion + staging steps programmatically**, without manual uploads.
+ The script performs **all ingestion + staging steps programmatically**, without manual uploads.
 
 > 📁 Script location: [`data_generator/synthetic_data_generator.py`](./data_generator/synthetic_data_generator.py)
 
@@ -123,12 +123,12 @@ These external tables were created for both:
 - `dev_healthcare_data` dataset (5K test records)
 - `prod_healthcare_data` dataset (20K records)
 
-#### ✅ Why external tables though?:
+#### Why external tables though?:
 - Cost-efficient for large, raw datasets
 - Schema can be auto-detected or explicitly defined
 - Queryable via standard SQL like any native table
 
-#### 🧱 Table Creation SQL Example (CSV):
+####  Table Creation SQL Example (CSV):
 
 ```sql
 CREATE OR REPLACE EXTERNAL TABLE `project_id.dev_healthcare_data.patient_data_external`
@@ -161,7 +161,7 @@ It shows how each model in the pipeline is derived from raw external source tabl
 
 
 
-#### 🧱 Key DBT Concepts Used:
+####  Key DBT Concepts Used:
 
 - Used `{{ source() }}` to connect to external BigQuery tables backed by GCS
 - Applied `{{ config(materialized='incremental') }}` to optimize model performance
@@ -181,7 +181,7 @@ DBT allows us to define tests and metadata **alongside our models** — all insi
 
 ---
 
-#### 🧪 Sample Test Configuration
+####  Sample Test Configuration
 
 Here’s an example from `schema.yml`:
 
@@ -205,13 +205,13 @@ models:
 To automate testing and deployment of my DBT models, I configured **GitHub Actions** to handle CI (Continuous Integration) and CD (Continuous Deployment).
 
 This ensures:
-- ✅ Every **pull request** runs `dbt test` to validate models before merging
-- ✅ Every **merge to main** triggers `dbt run` to deploy production models to BigQuery
-- ✅ All deployments are version-controlled, reproducible, and secure
+-  Every **pull request** runs `dbt test` to validate models before merging
+-  Every **merge to main** triggers `dbt run` to deploy production models to BigQuery
+-  All deployments are version-controlled, reproducible, and secure
 
 ---
 
-#### 🔁 Continuous Integration (`ci.yml`)
+####  Continuous Integration (`ci.yml`)
 
 - Triggered on **pull requests to `main`**
 - Spins up a fresh Ubuntu runner
@@ -240,13 +240,13 @@ jobs:
       - run: dbt test --profiles-dir /home/runner/.dbt --target dev
 ```
 
-#### 🚀 Continuous Deployment (cd.yml)
+####  Continuous Deployment (cd.yml)
 Triggered on push to main
 
 - Installs DBT, authenticates with GCP
 - Runs dbt run with --target prod to build models into the production dataset
 
-  #### 📁 Key Deployment Details
+  ####  Key Deployment Details
 
 | Config         | Value |
 |----------------|-------|
@@ -265,7 +265,7 @@ GCP credentials stored as GitHub Secrets
 
 gcp-key.json and profiles.yml are generated at runtime (not stored in repo)
 
-## 📘 Key Learnings
+##  Key Learnings
 
 - Developed a clear understanding of DBT’s transformation flow and model structure
 - Gained hands-on experience integrating Python, BigQuery, and GCS for cloud data pipelines
